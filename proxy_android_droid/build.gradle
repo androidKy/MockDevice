@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+def cfg = rootProject.ext.configuration // 配置
+def libs = rootProject.ext.libraries // 库
+android {
+    compileSdkVersion cfg.compileVersion
+
+    defaultConfig {
+        minSdkVersion cfg.minSdk
+        targetSdkVersion cfg.targetSdk
+        versionCode 1
+        versionName "1.0"
+        //useLibrary'org.apache.http.legacy'
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    /*sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jni']
+        }
+    }*/
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "com.android.support:appcompat-v7:${libs.supportVersion}"
+    //implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    implementation project(':utils_library')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
+}
+
+task make_proxy_jar(dependsOn: ['compileReleaseJavaWithJavac'], type: Jar) {
+    def proxy_droid = "proxy_droid"
+    delete 'build/libs/${proxy_droid}*.jar' //生成的jar存放路径
+    /* appendix = ""
+     baseName = "common_utils"
+
+     classifier = "release"
+     //后缀名
+     extension = "jar"*/
+    version = "1.0.0"
+    //最终的 Jar 包名，如果没设置，默认为 [baseName]-[appendix]-[version]-[classifier].[extension]
+    archiveName = "${proxy_droid}_${version}_release.jar"
+    //需打包的资源所在的路径集
+    def srcClassesDir1 = [project.buildDir.absolutePath + "/tmp/kotlin-classes/release"] //Kotlin 生成的classes文件路径
+    def srcClassesDir2 = [project.buildDir.absolutePath + "/intermediates/classes/release"] //Java 生成的classes文件路径
+    //初始化资源路径集
+    from srcClassesDir1, srcClassesDir2
+    //去除路径集下部分的资源
+    exclude "**/R.class"
+    exclude "**/R\$*.class"
+    exclude "**/META-INF/**"
+    //只导入资源路径集下的部分资源
+    include "com/utils/common/**/*.class"
+}

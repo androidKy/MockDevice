@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvRealImei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:padding="5dp"
+        android:text="888888888888"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"
+        android:text="服务器IMEI："
+        android:textColor="#F44336"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/btMockDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="一键更改设备参数和IP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"
+        android:text="本设备IMEI："
+        android:textColor="#F44336"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/btMockDevice"
+        app:layout_constraintTop_toBottomOf="@+id/btMockDevice" />
+
+    <TextView
+        android:id="@+id/tvServerImei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:padding="5dp"
+        android:text="888877888888"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/tvProxyTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="代理未连接"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvImeiTip"
+        app:layout_constraintStart_toEndOf="@+id/tvImeiTip"
+        app:layout_constraintTop_toTopOf="@+id/tvImeiTip" />
+
+    <TextView
+        android:id="@+id/tvImeiTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="IMEI未修改"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Button
+        android:id="@+id/btClearInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="清除QQ微信浏览器信息"
+        app:layout_constraintBottom_toBottomOf="@+id/btMockDevice"
+        app:layout_constraintStart_toEndOf="@+id/btMockDevice"
+        app:layout_constraintTop_toTopOf="@+id/btMockDevice" />
+
+    <Button
+        android:id="@+id/start_proxy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="开启代理"
+        app:layout_constraintEnd_toEndOf="@+id/tvImeiTip"
+        app:layout_constraintStart_toStartOf="@+id/tvImeiTip"
+        app:layout_constraintTop_toBottomOf="@+id/tvImeiTip" />
+
+    <Button
+        android:id="@+id/stop_proxy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="停止代理"
+        app:layout_constraintEnd_toEndOf="@+id/tvProxyTip"
+        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintStart_toStartOf="@+id/tvProxyTip"
+        app:layout_constraintTop_toBottomOf="@+id/tvProxyTip" />
+
+    <Button
+        android:id="@+id/open_dns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="开启DNS"
+        app:layout_constraintEnd_toEndOf="@+id/start_proxy"
+        app:layout_constraintStart_toStartOf="@+id/start_proxy"
+        app:layout_constraintTop_toBottomOf="@+id/start_proxy" />
+
+    <Button
+        android:id="@+id/close_dns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="关闭DNS"
+        app:layout_constraintStart_toStartOf="@+id/stop_proxy"
+        app:layout_constraintTop_toBottomOf="@+id/stop_proxy" />
+
+
+</android.support.constraint.ConstraintLayout>
