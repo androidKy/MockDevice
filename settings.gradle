@@ -1,2 +1,2 @@
-include ':app', ':saf-log', ':localVPN', ':utils_library', ':xposed_library', ':proxydroid', ':batmobi_vpn', ':proxy_droid', ':actionbarsherlock', ':proxy_android_droid'
+include ':app', ':saf-log', ':localVPN', ':utils_library', ':xposed_library', ':proxydroid', ':batmobi_vpn', ':proxy_droid', ':actionbarsherlock', ':proxy_android_droid', ':backup_util', ':backup_test'
 include ':xposedAppSettings'

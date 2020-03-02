@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">backup_test</string>
+    <string name="bt_clearAppInfo">清除app信息</string>
+</resources>
