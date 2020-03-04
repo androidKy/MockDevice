@@ -77,9 +77,39 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:text="com.tencent.mm"
         android:hint="请输入包名"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/bt_wechat"
         app:layout_constraintTop_toBottomOf="@+id/bt_titok" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="备份的包名："
+        app:layout_constraintStart_toStartOf="@+id/et_pkg"
+        app:layout_constraintTop_toBottomOf="@+id/et_pkg" />
+
+    <TextView
+        android:id="@+id/tv_pkg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="com.tencent.mm"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="提示信息"
+        android:textColor="#BD4040"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

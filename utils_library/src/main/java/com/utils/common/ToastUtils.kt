@@ -13,5 +13,12 @@ class ToastUtils {
         fun showToast(context: Context, msg: String) {
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
         }
+
+        fun showToast(msg:String)
+        {
+            Utils.getApp()?.run {
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

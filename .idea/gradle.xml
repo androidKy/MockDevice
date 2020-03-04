@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/actionbarsherlock" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/backup_test" />
+            <option value="$PROJECT_DIR$/backup_util" />
+            <option value="$PROJECT_DIR$/batmobi_vpn" />
+            <option value="$PROJECT_DIR$/localVPN" />
+            <option value="$PROJECT_DIR$/proxy_android_droid" />
+            <option value="$PROJECT_DIR$/proxy_droid" />
+            <option value="$PROJECT_DIR$/proxydroid" />
+            <option value="$PROJECT_DIR$/saf-log" />
+            <option value="$PROJECT_DIR$/task_lib" />
+            <option value="$PROJECT_DIR$/utils_library" />
+            <option value="$PROJECT_DIR$/xposedAppSettings" />
+            <option value="$PROJECT_DIR$/xposed_library" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
