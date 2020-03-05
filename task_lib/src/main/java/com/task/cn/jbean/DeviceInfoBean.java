@@ -2,15 +2,17 @@ package com.task.cn.jbean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
  * Description:
  * Created by Quinin on 2020-03-04.
  **/
-public class DeviceInfoBean extends RealmObject {
+public class DeviceInfoBean extends RealmObject implements Serializable {
     /**
      * id : 1004
      * account_ids : [{"account_id":1001},{"account_id":1002}]
@@ -105,7 +107,7 @@ public class DeviceInfoBean extends RealmObject {
     @SerializedName("android.webview.WebSettings.setUserAgentString")
     private String userAgent;
 
-    private List<AccountIdsBean> account_ids;
+    private RealmList<AccountIdsBean> account_ids;
 
     public long getId() {
         return id;
@@ -347,11 +349,11 @@ public class DeviceInfoBean extends RealmObject {
         this.userAgent = userAgent;
     }
 
-    public List<AccountIdsBean> getAccount_ids() {
+    public RealmList<AccountIdsBean> getAccount_ids() {
         return account_ids;
     }
 
-    public void setAccount_ids(List<AccountIdsBean> account_ids) {
+    public void setAccount_ids(RealmList<AccountIdsBean> account_ids) {
         this.account_ids = account_ids;
     }
 }

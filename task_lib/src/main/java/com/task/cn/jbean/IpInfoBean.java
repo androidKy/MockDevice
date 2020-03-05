@@ -1,12 +1,14 @@
 package com.task.cn.jbean;
 
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 
 /**
  * Description:
  * Created by Quinin on 2020-03-04.
  **/
-public class IpInfoBean extends RealmObject {
+public class IpInfoBean extends RealmObject implements Serializable {
     /**
      * id : 1003
      * ip : 192.168.2.111

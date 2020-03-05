@@ -8,21 +8,21 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.mock.device.bean.DeviceParamsBean;
 import com.proxy.droid.ProxyManager;
-import com.proxy.droid.core.ProxyCore;
-import com.proxy.droid.core.ProxyCoreImpl;
 import com.proxy.droid.bean.ProxyParamsBean;
+import com.proxy.droid.core.ProxyCore;
 import com.proxy.droid.core.ProxyStatusListener;
 import com.safframework.log.L;
 import com.utils.common.CMDUtil;
@@ -51,7 +51,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Semaphore;
 
 import static com.vm.shadowsocks.LocalVpnManager.START_VPN_SERVICE_REQUEST_CODE;
 

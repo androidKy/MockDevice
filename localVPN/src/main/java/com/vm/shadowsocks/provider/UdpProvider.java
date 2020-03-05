@@ -1,12 +1,13 @@
 package com.vm.shadowsocks.provider;
 
 import android.os.ParcelFileDescriptor;
-import android.support.annotation.NonNull;
 import android.system.Os;
 import android.system.OsConstants;
 import android.system.StructPollfd;
 import android.util.Log;
 
+
+import androidx.annotation.NonNull;
 
 import com.safframework.log.L;
 import com.vm.shadowsocks.core.LocalVpnService;

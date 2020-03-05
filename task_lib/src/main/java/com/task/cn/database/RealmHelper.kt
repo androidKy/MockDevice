@@ -17,7 +17,7 @@ class RealmHelper : DBHelper {
             val builder = RealmConfiguration.Builder()
                     .deleteRealmIfMigrationNeeded()//声明版本冲突时自动删除原数据库，开发时候打开
                     .name(TASK_REALM_NAME)
-                    .encryptionKey(TASK_DB_KEY.toByteArray(Charsets.UTF_8))
+                    //.encryptionKey(TASK_DB_KEY.toByteArray(Charsets.UTF_8))
                     .schemaVersion(1L)
                     .build()
             mTaskRealm = Realm.getInstance(builder)

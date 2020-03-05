@@ -11,8 +11,7 @@ import com.task.cn.jbean.AccountInfoBean
 import com.task.cn.jbean.DeviceInfoBean
 import com.task.cn.jbean.IpInfoBean
 import com.task.cn.jbean.TaskBean
-import com.task.cn.manager.TaskBuilder
-import com.utils.common.ToastUtils
+import com.task.cn.manager.TaskManager
 
 /**
  * Description:
@@ -24,16 +23,14 @@ class TaskControllerImpl(private val taskControllerView: ITaskControllerView) : 
         const val MSG_TASK_COUNT: Int = 1000
     }
 
-    @Volatile
     private var mTaskStatus: StatusTask = StatusTask.TASK_UNSTART
-    @Volatile
     private var mTaskStartCount: Int = 0    //已开始的任务数量
-    @Volatile
     private var mTaskErrorCount: Int = 0  //错误的任务数量
+    private var mTaskFinished: Boolean = false
 
-    @Volatile
+    private var mErrorStringBuilder: StringBuilder = StringBuilder()
+
     private var mTaskBean: TaskBean = TaskBean()
-    @Volatile
     private var mRealmHelper: RealmHelper = RealmHelper()
 
     private var mTaskExecutor: TaskInfoImpl? = null
@@ -41,11 +38,7 @@ class TaskControllerImpl(private val taskControllerView: ITaskControllerView) : 
     private val mHandler: Handler = Handler(Looper.getMainLooper()) {
         if (it.what == MSG_TASK_COUNT) {
             if (mTaskStartCount == 0) { //已开始的任务完成
-                if (mTaskErrorCount == 0) {
-                    mTaskExecutor?.getLocationByIP(mTaskBean.ip_info.ip)
-                } else {
-                    taskControllerView.onTaskPrepared(Result(StatusCode.FAILED, false, "ready failed"))
-                }
+                dealTask()
             } else {
                 sendTaskMsg(500)
             }
@@ -54,39 +47,61 @@ class TaskControllerImpl(private val taskControllerView: ITaskControllerView) : 
         false
     }
 
-    override fun startTask(taskBuilder: TaskBuilder) {
+    @Synchronized
+    private fun dealTask() {
+        if (mTaskFinished)
+            return
+        if (mTaskErrorCount == 0) {
+            mTaskFinished = true
+            mTaskExecutor?.getLocationByIP(mTaskBean.ip_info.ip)
+        } else {
+            mTaskFinished = true
+            val errorMsg = mErrorStringBuilder.toString()
+            L.d("任务出现错误: $errorMsg")
+            taskControllerView.onTaskPrepared(Result(StatusCode.FAILED, false, errorMsg))
+        }
+    }
+
+    override fun startTask(taskBuilder: TaskManager.Companion.TaskBuilder) {
         /**
          * 上次的任务未执行完成
          */
-        if (taskBuilder.mLastTaskStatus == StatusTask.TASK_RUNNING) {
-            ToastUtils.showToast("上次的任务未执行完成")
+        if (taskBuilder.getLastTaskStatus() == StatusTask.TASK_RUNNING) {
+            //ToastUtils.showToast("上次的任务未执行完成")
             setTaskStatus(StatusTask.TASK_RUNNING)
+            taskControllerView.onTaskPrepared(Result(StatusCode.FAILED, false, "上次的任务未执行完成"))
             return
         }
+        /*if(taskBuilder.getCityName().isNullOrEmpty())
+        {
+            taskControllerView.onTaskPrepared(Result(StatusCode.FAILED,false,"未指定城市名"))
+            return
+        }*/
 
         setTaskStatus(StatusTask.TASK_RUNNING)
 
         mTaskStartCount = 0
         mTaskErrorCount = 0
+        mTaskFinished = false
 
         mTaskExecutor = TaskInfoImpl(this)
 
-        if (taskBuilder.mTaskInfoSwitch) {
+        if (taskBuilder.getTaskInfoSwitch()) {
             mTaskStartCount++
             mTaskExecutor?.getTaskInfo()
         }
 
-        if (taskBuilder.mIpSwitch) {
+        if (taskBuilder.getIpSwitch()) {
             mTaskStartCount++
-            mTaskExecutor?.getIpInfo()
+            mTaskExecutor?.getIpInfo(taskBuilder.getCityName())
         }
 
-        if (taskBuilder.mAccountSwitch) {
+        if (taskBuilder.getAccountSwitch()) {
             mTaskStartCount++
             mTaskExecutor?.getAccountInfo()
         }
 
-        if (taskBuilder.mDeviceSwitch) {
+        if (taskBuilder.getDeviceSwitch()) {
             mTaskStartCount++
             mTaskExecutor?.getDeviceInfo()
         }
@@ -150,7 +165,7 @@ class TaskControllerImpl(private val taskControllerView: ITaskControllerView) : 
         mRealmHelper.closeRealm()
     }
 
-
+    @Synchronized
     private fun sendTaskResult() {
         mTaskStartCount--
         sendTaskMsg(0)
@@ -164,7 +179,10 @@ class TaskControllerImpl(private val taskControllerView: ITaskControllerView) : 
     }
 
     private fun dealError(msg: String) {
-        L.d(msg)
+        if (mErrorStringBuilder.isEmpty())
+            mErrorStringBuilder.append(msg)
+        else mErrorStringBuilder.append("|$msg")
+
         mTaskErrorCount++
         setTaskStatus(StatusTask.TASK_EXCEPTION)
     }

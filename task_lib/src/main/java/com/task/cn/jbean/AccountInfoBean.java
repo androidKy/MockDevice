@@ -1,14 +1,16 @@
 package com.task.cn.jbean;
 
+import java.io.Serializable;
 import java.util.List;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 /**
  * Description:
  * Created by Quinin on 2020-03-04.
  **/
-public class AccountInfoBean extends RealmObject {
+public class AccountInfoBean extends RealmObject implements Serializable {
     /**
      * id : 1001
      * account : 1784389748
@@ -24,7 +26,7 @@ public class AccountInfoBean extends RealmObject {
     private String platform;
     private String register_date;
     private long last_backup_id;
-    private List<LoginInfoBean> login_info;
+    private RealmList<LoginInfoBean> login_info;
 
     public long getId() {
         return id;
@@ -74,11 +76,11 @@ public class AccountInfoBean extends RealmObject {
         this.last_backup_id = last_backup_id;
     }
 
-    public List<LoginInfoBean> getLogin_info() {
+    public RealmList<LoginInfoBean> getLogin_info() {
         return login_info;
     }
 
-    public void setLogin_info(List<LoginInfoBean> login_info) {
+    public void setLogin_info(RealmList<LoginInfoBean> login_info) {
         this.login_info = login_info;
     }
 }

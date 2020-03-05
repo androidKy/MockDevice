@@ -9,6 +9,9 @@ import com.task.cn.jbean.AccountInfoBean
 import com.task.cn.jbean.DeviceInfoBean
 import com.task.cn.jbean.IpInfoBean
 import com.task.cn.jbean.TaskBean
+import com.task.cn.proxy.ProxyController
+import com.task.cn.proxy.ProxyManager
+import com.task.cn.proxy.ProxyRequestListener
 import com.utils.common.Utils
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -23,8 +26,15 @@ class TaskInfoImpl(private val taskInfoView: TaskInfoView) : ITaskInfo {
         Result(StatusCode.FAILED, TaskBean(), StatusMsg.DEFAULT.msg).run {
             try {
                 val inputStream = Utils.getApp().assets.open("task_info.json")
-                val bufferReader = BufferedReader(InputStreamReader(inputStream))
-                val taskBean = Gson().fromJson(bufferReader, TaskBean::class.java)
+
+                val content = BufferedReader(InputStreamReader(inputStream))
+                        .lineSequence()
+                        .fold(StringBuilder()) { buff, line -> buff.append(line) }
+                        .toString()
+                        .replace("\\s+".toRegex(), "")
+                L.d(content)
+
+                val taskBean = Gson().fromJson(content, TaskBean::class.java)
 
                 this.code = StatusCode.SUCCEED
                 this.r = taskBean
@@ -46,12 +56,15 @@ class TaskInfoImpl(private val taskInfoView: TaskInfoView) : ITaskInfo {
         }
     }
 
-    override fun getIpInfo() {
-        Result(StatusCode.FAILED, IpInfoBean(), StatusMsg.DEFAULT.msg).run {
-
-
-            taskInfoView.onResponIpInfo(this)
-        }
+    override fun getIpInfo(cityName: String) {
+        ProxyManager()
+                .setCityName(cityName)
+                .setProxyRequestListener(object : ProxyRequestListener {
+                    override fun onProxyResult(result: Result<IpInfoBean>) {
+                        taskInfoView.onResponIpInfo(result)
+                    }
+                })
+                .startProxy()
     }
 
 
@@ -66,6 +79,7 @@ class TaskInfoImpl(private val taskInfoView: TaskInfoView) : ITaskInfo {
     override fun getLocationByIP(ip: String) {
         L.d("current ip: $ip")
 
+        taskInfoView.onResponIPAddress("", "")
     }
 
     override fun changeDeviceInfo(taskBean: TaskBean) {

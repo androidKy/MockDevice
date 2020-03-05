@@ -10,13 +10,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 
 import java.util.*;
 
@@ -386,7 +387,9 @@ public final class PermissionUtils {
                         finish();
                         return;
                     }
-                    requestPermissions(sInstance.mPermissionsRequest.toArray(new String[size]), 1);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(sInstance.mPermissionsRequest.toArray(new String[size]), 1);
+                    }
                 }
             } else if (byteExtra == TYPE_WRITE_SETTINGS) {
                 super.onCreate(savedInstanceState);

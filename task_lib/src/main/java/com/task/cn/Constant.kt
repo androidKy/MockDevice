@@ -7,10 +7,6 @@ package com.task.cn
 class URL {
     companion object {
         /**
-         * 获取IP
-         */
-        const val GET_IP_URL = ""
-        /**
          * 获取设备信息
          */
         const val GET_DEVICE_INFO_URL = ""
@@ -25,6 +21,29 @@ class URL {
          * 获取任务信息
          */
         const val GET_TASK_INFO_URL = ""
+    }
+}
+
+class ProxyConstant {
+    companion object {
+        /**
+         * 获取IP
+         */
+        const val IP_URL = "http://192.168.38.1:8096/open?api=acheqcie&close_time=300&area="  //440000
+        const val CITY_CODE_URL = "http://ip.25ios.com:8089/6796324d5300e5978673d71c50780067.php"
+        const val PING_URL = "http://pv.sohu.com/cityjson?ie=utf-8"    //https://2020.ip138.com/
+
+        const val DATA_TYPE = "multipart/form-data"
+        const val POST_PARAM_METHOD = "method"
+        const val POST_PARAM_IMEI = "imei"
+        const val POST_PARAM_PLATFORMID = "platformId"
+        const val POST_PARAM_AREA = "area"
+        const val POST_PARAM_PORT = "port"
+
+        const val SP_CITY_LIST = "sp_city_data"
+        //data key
+        const val KEY_CITY_DATA = "key_cities"              //城市列表
+        const val KEY_CITY_GET_DATE = "key_city_get_date"   //获取城市列表的时间
     }
 }
 

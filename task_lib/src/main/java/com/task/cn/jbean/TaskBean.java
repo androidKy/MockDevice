@@ -1,5 +1,7 @@
 package com.task.cn.jbean;
 
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
@@ -8,7 +10,7 @@ import io.realm.annotations.Required;
  * Description:
  * Created by Quinin on 2020-03-04.
  **/
-public class TaskBean extends RealmObject {
+public class TaskBean extends RealmObject implements Serializable {
 
     /**
      * task_id : 1000
@@ -19,16 +21,15 @@ public class TaskBean extends RealmObject {
      */
     @PrimaryKey
     private long id;
-    @Required
     private long task_id;
 
-    @Required
+    //@Required
     private AccountInfoBean account_info;
-    @Required
+   // @Required
     private BackupInfoBean backup_info;
-    @Required
+   // @Required
     private IpInfoBean ip_info;
-    @Required
+    //@Required
     private DeviceInfoBean device_info;
 
     /**
@@ -37,7 +38,7 @@ public class TaskBean extends RealmObject {
      * 2：任务完成
      * -1：任务异常
      */
-    @Required
+    //@Required
     private int task_status = 0;
 
     public long getTask_id() {

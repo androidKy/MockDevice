@@ -10,7 +10,7 @@ import com.task.cn.jbean.TaskBean
 interface ITaskInfo {
     fun getTaskInfo()
     fun getAccountInfo()
-    fun getIpInfo()
+    fun getIpInfo(cityName:String)
     fun getDeviceInfo()
 
     fun getLocationByIP(ip:String)

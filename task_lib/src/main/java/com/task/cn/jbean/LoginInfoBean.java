@@ -1,12 +1,14 @@
 package com.task.cn.jbean;
 
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 
 /**
  * Description:
  * Created by Quinin on 2020-03-04.
  **/
-public class LoginInfoBean extends RealmObject {
+public class LoginInfoBean extends RealmObject implements Serializable {
     /**
      * login_date : 2020-3-2 17:53
      * device_id : 1003

@@ -16,13 +16,14 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.LocaleList;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import androidx.core.app.ActivityCompat;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;

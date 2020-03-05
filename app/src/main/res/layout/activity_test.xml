@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestActivity">
+
+    <EditText
+        android:id="@+id/et_cityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:inputType="text"
+        android:text="茂名市"
+        android:hint="请输入城市名"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt_proxy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="获取代理"
+        app:layout_constraintEnd_toEndOf="@+id/et_cityName"
+        app:layout_constraintStart_toStartOf="@+id/et_cityName"
+        app:layout_constraintTop_toBottomOf="@+id/et_cityName" />
+
+    <Button
+        android:id="@+id/bt_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="开始任务"
+        app:layout_constraintBottom_toBottomOf="@+id/bt_proxy"
+        app:layout_constraintStart_toEndOf="@+id/bt_proxy"
+        app:layout_constraintTop_toTopOf="@+id/bt_proxy" />
+
+    <TextView
+        android:id="@+id/tv_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:text="tip"
+        app:layout_constraintBottom_toBottomOf="@+id/et_cityName"
+        app:layout_constraintStart_toEndOf="@+id/et_cityName"
+        app:layout_constraintTop_toTopOf="@+id/et_cityName"
+        tools:text="tip" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

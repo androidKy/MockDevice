@@ -19,8 +19,9 @@ package com.gun.local.internal;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.provider.Settings;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Base64;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.gun.local.LocalVPNService;
 import com.gun.local.GunLib;
