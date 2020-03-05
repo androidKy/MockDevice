@@ -1,5 +1,6 @@
 package com.task.cn.database
 
+import com.safframework.log.L
 import com.task.cn.jbean.TaskBean
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -9,6 +10,7 @@ import io.realm.RealmConfiguration
  * Created by Quinin on 2020-03-04.
  **/
 class RealmHelper : DBHelper {
+
 
     private var mTaskRealm: Realm? = null
 
@@ -36,18 +38,25 @@ class RealmHelper : DBHelper {
 
     override fun insertTask(taskBean: TaskBean) {
         mTaskRealm?.executeTransaction {
-            var primaryKey = 0L
-            val tasks = it.where(TaskBean::class.java).findAll()
-            if (!tasks.isNullOrEmpty()) {
-                primaryKey = (tasks.size + 1).toLong()
+            val result = it.where(TaskBean::class.java).equalTo("task_id", taskBean.task_id).findFirst()
+            if (result != null) {
+                L.d("只更新TaskBean")
             } else {
-                primaryKey++
-            }
+                var primaryKey = 0L
+                val tasks = it.where(TaskBean::class.java).findAll()
+                if (!tasks.isNullOrEmpty()) {
+                    primaryKey = (tasks.size + 1).toLong()
+                } else {
+                    primaryKey++
+                }
+                taskBean.id = primaryKey
 
-            taskBean.id = primaryKey
+                L.d("主键: $primaryKey")
+            }
             it.copyToRealmOrUpdate(taskBean)
         }
     }
+
 
     override fun queryTasksByStatus(taskStatus: Int): List<TaskBean> {
         val taskBeanList = ArrayList<TaskBean>()

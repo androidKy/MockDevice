@@ -86,7 +86,7 @@ class ProxyController : IProxy {
 
         if (lastGetCityDate.isNullOrEmpty() || TimeUtils.getDays(currentDate, lastGetCityDate) >= 1) { //对比当前时间与上次获取的时间
             //重新获取
-            L.d("间隔一天，重新获取城市ID")
+            L.d("重新获取城市ID")
             //getCityList()
             val imei = DevicesUtil.getIMEI(Utils.getApp())
             L.d("imei: $imei")

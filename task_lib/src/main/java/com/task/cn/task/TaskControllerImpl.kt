@@ -23,9 +23,13 @@ class TaskControllerImpl(private val taskControllerView: ITaskControllerView) : 
         const val MSG_TASK_COUNT: Int = 1000
     }
 
+
     private var mTaskStatus: StatusTask = StatusTask.TASK_UNSTART
+    @Volatile
     private var mTaskStartCount: Int = 0    //已开始的任务数量
+    @Volatile
     private var mTaskErrorCount: Int = 0  //错误的任务数量
+    @Volatile
     private var mTaskFinished: Boolean = false
 
     private var mErrorStringBuilder: StringBuilder = StringBuilder()
@@ -49,6 +53,7 @@ class TaskControllerImpl(private val taskControllerView: ITaskControllerView) : 
 
     @Synchronized
     private fun dealTask() {
+        updateTaskToRealm(mTaskBean)
         if (mTaskFinished)
             return
         if (mTaskErrorCount == 0) {
@@ -170,7 +175,6 @@ class TaskControllerImpl(private val taskControllerView: ITaskControllerView) : 
         mTaskStartCount--
         sendTaskMsg(0)
 
-        updateTaskToRealm(mTaskBean)
     }
 
 

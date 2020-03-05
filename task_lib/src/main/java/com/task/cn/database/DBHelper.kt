@@ -9,6 +9,7 @@ import com.task.cn.jbean.TaskBean
 interface DBHelper {
     fun insertTask(taskBean: TaskBean)
 
+
     fun queryTasksByStatus(taskStatus: Int):List<TaskBean>
 
     fun queryTaskByTaskId(taskId:Long):TaskBean
